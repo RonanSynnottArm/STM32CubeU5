@@ -83,7 +83,7 @@ jobs:
               node-version: 16
               
           - name: sensor demo
-            run:  npm .github/workflows/example-sensor-test.js
+            run:  node .github/workflows/example-sensor-test.js
 
           - name: Stopping/Deleting ${{ env.INSTANCE1 }}
             run: | 
