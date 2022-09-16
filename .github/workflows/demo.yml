@@ -25,17 +25,11 @@ concurrency:
 
 jobs:
     rebuild:
-        # runs-on: ubuntu-latest
-        # steps:
-          # - name: clone repo
-            # uses: actions/checkout@v2
-            
-          # - name: rebuild example
-            # run: |
-              # echo to do
-              # echo can build on local machine (Keil MDK)
-              # echo can build on AVH AMI with
-              # echo cbuild.sh <proj>.cprj
+        runs-on: ubuntu-latest
+        steps:
+          - name: rebuild example
+            run: |
+              echo to do
         
     avh-test:
         runs-on: ubuntu-latest
