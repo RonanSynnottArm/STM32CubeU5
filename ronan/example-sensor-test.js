@@ -94,8 +94,10 @@ async function setup_instance() {
 
   let projects = await api.v1GetProjects();
   let project = projects[0];
-
-  let firmware = "demo.bin";
+  
+  console.log("Current directory:", __dirname);
+  // let firmware = "demo.bin";
+  let firmware = "demo.axf";
 
   let instance = await api.v1CreateInstance({
     project: project.id,
