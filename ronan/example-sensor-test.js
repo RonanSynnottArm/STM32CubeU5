@@ -95,7 +95,7 @@ async function setup_instance() {
   let projects = await api.v1GetProjects();
   let project = projects[0];
 
-  let firmware = "./demo.axf";
+  let firmware = "demo.bin";
 
   let instance = await api.v1CreateInstance({
     project: project.id,
@@ -109,14 +109,13 @@ async function setup_instance() {
   instance = await waitForState(instance, state => state !== 'creating')
 
   console.log('Uploading new firmware...')
-  console.log('RONAN GOT TO HERE...')
   const fileStream = createReadStream(firmware)
-  console.log('RONAN GOT TO HERE?...')
+  console.log('RONAN GOT TO HERE...')
   await api.v1CreateImage('iotfirmware', 'plain', {
     instance: instance.id,
     file: fileStream
   })
-
+  console.log('RONAN DID NOT GET TO HERE...')
   await api.v1RebootInstance(instance.id) // Reboot to load uploaded firmware
   console.log('Waiting for instance to boot.')
   instance = await waitForState(instance, state => state === 'on')

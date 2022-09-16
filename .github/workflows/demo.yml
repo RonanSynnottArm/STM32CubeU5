@@ -70,6 +70,7 @@ jobs:
               mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
               cp STM32CubeU5_Demo_U585I-IOT02A.axf test/demo.axf
+              cp STM32CubeU5_Demo_U585I-IOT02A.bin test/demo.bin
               cp example-sensor-test.js test/index.js
               cd test
               pwd
