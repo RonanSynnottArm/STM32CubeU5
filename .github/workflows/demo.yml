@@ -24,8 +24,22 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    rebuild:
+        runs-on: ubuntu-latest
+        steps:
+          # - name: clone repo
+            # uses: actions/checkout@v2
+            
+          - name: rebuild example
+            run: |
+              echo to do
+              echo can build on local machine (Keil MDK)
+              echo can build on AVH AMI with
+              echo cbuild.sh <proj>.cprj
+        
     avh-test:
         runs-on: ubuntu-latest
+        needs: rebuild
         env:
           ENDPOINT: https://app.avh.arm.com/api   
           API_TOKEN: ${{ secrets.API_TOKEN }}   
@@ -36,7 +50,7 @@ jobs:
           - name: Get OpenVPN websockets and other dependencies
             run: |
                 sudo apt-get -y update
-                sudo apt -y install openvpn sshpass curl jq mocha
+                sudo apt -y install openvpn sshpass curl jq
                 pip install websockets asyncio
 
           - name: install npm
@@ -46,7 +60,7 @@ jobs:
               
           - name: sensor demo
             run: |
-              npm install glob
+              npm install mocha
               cd ronan
               mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
