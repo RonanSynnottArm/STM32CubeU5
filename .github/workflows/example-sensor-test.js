@@ -95,11 +95,11 @@ async function setup_instance() {
   let projects = await api.v1GetProjects();
   let project = projects[0];
 
-  let firmware = "/opt/test/firmware.bin";
+  let firmware = "demo.axf";
 
   let instance = await api.v1CreateInstance({
     project: project.id,
-    name: "STM32U5-test",
+    name: "STM32U5-Ronan",
     flavor: 'stm32u5-b-u585i-iot02a',
     os: '1.1.0',
     osbuild: 'WS'
