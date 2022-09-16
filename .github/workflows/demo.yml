@@ -55,6 +55,9 @@ jobs:
           - name: sensor demo
             run: |
               npm install mocha
+              npm install split2
+              npm install websocket-stream
+
               cd ronan
               mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
