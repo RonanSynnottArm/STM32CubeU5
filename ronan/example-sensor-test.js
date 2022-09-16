@@ -111,6 +111,7 @@ async function setup_instance() {
   console.log('Uploading new firmware...')
   console.log('RONAN GOT TO HERE...')
   const fileStream = createReadStream(firmware)
+  console.log('RONAN GOT TO HERE?...')
   await api.v1CreateImage('iotfirmware', 'plain', {
     instance: instance.id,
     file: fileStream
