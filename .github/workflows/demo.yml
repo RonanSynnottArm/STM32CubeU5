@@ -78,10 +78,10 @@ jobs:
               # ./scripts/avh/web_socket_chip_tool_test.py $(cat "./avhcli/${{ env.INSTANCE1 }}_console.txt")
 
           - name: install npm
-          - uses: actions/setup-node@v3
+            uses: actions/setup-node@v3
             with:
               node-version: 16        
-          - run: npm ci
+            run: npm ci
 #          - run: npm .github/workflows/example-sensor-test.js
 
           - name: Stopping/Deleting ${{ env.INSTANCE1 }}
