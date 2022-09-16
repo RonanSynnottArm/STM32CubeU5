@@ -1,0 +1,1 @@
+stm32cubeu5_demo_u585i-iot02a\exe\startup_stm32u585xx.o: startup_stm32u585xx.s
