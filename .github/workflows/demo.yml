@@ -50,15 +50,15 @@ jobs:
               avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL create
               avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL start
 
-          - name: connect to AVH OpenVPN
-            run: |
-              sudo openvpn --config avhcli/avh.ovpn --daemon 
-              echo Connecting and ping-ing instances...
-              while ! ping -c 1 $(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"); do
-                echo .
-                sleep 1
-              done
-              echo Connected
+          # - name: connect to AVH OpenVPN
+            # run: |
+              # sudo openvpn --config avhcli/avh.ovpn --daemon 
+              # echo Connecting and ping-ing instances...
+              # while ! ping -c 1 $(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"); do
+                # echo .
+                # sleep 1
+              # done
+              # echo Connected
 
           # - name: scp binaries to ${{ env.INSTANCE1 }}
             # run: |
@@ -79,5 +79,5 @@ jobs:
           - name: Stopping/Deleting ${{ env.INSTANCE1 }}
             run: | 
               sudo killall openvpn
-              # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL delete
-              avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL stop
+              avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL delete
+              # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL stop
