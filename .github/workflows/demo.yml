@@ -47,8 +47,10 @@ jobs:
           - name: sensor demo
             run: |
               pwd
-              cp .github/workflows/example-sensor-test.js .
+              ls
+              cd ronan
               cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ./demo.axf
+              ls
               npm ci
               export REPORT_PATH=report.json
               npm run test
