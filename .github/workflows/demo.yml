@@ -30,6 +30,9 @@ jobs:
           - name: rebuild example
             run: |
               echo to do
+              # cd Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM
+              # cbuild.sh STM32CubeU5_Demo_U585I-IOT02A.STM32CubeU5_Demo_U585I-IOT02A.cprj
+
         
     avh-test:
         runs-on: ubuntu-latest
@@ -57,7 +60,7 @@ jobs:
               npm install mocha
               npm install split2
               npm install websocket-stream
-
+              npm install promise-socket
               cd ronan
               mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
