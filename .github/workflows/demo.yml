@@ -65,19 +65,28 @@ jobs:
               # sshpass -p raspberry scp -o StrictHostKeyChecking=no ${{ env.INSTANCE1 }} pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"):~/
               # sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt") chmod 755 ${{ env.INSTANCE1 }}
               
-          # - name: chmod 755 python scripts
-            # run: |
+          - name: chmod 755 python scripts
+            run: |
               # chmod 755 scripts/avh/ws.py
               # chmod 755 scripts/avh/web_socket_light_test.py
               # chmod 755 scripts/avh/web_socket_chip_tool_test.py
-              # chmod 755 avhcli/ws.py
+              chmod 755 avhcli/ws.py
 
           # - name: Start webserver on ${{ env.INSTANCE1 }} via WebSocket to console
             # run: |
               # ./scripts/avh/web_socket_chip_tool_test.py $(cat "./avhcli/${{ env.INSTANCE1 }}_console.txt")
 
+          - name: install npm
+          - uses: actions/checkout@v3
+          - uses: actions/setup-node@v3
+            with:
+              node-version: 16
+          - run: npm ci
+          - run: npm test
+#          - run: npm .github/workflows/example-sensor-test.js
+
           - name: Stopping/Deleting ${{ env.INSTANCE1 }}
             run: | 
-              sudo killall openvpn
+              # sudo killall openvpn
               avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL delete
               # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL stop
