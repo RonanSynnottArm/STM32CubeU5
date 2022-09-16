@@ -46,39 +46,11 @@ jobs:
               
           - name: sensor demo
             run: |
-              pwd
-              ls
+              cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/demo.axf              
               cd ronan
-              cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ./demo.axf
+              pwd
               ls
               npm ci
               export REPORT_PATH=report.json
               npm run test
-              
-
-          # - name: pull avhcli utility
-            # run: |
-              # echo need to update repo link when available
-              # # git clone https://github.com/ARM-software/avhcli.git
-              # git clone https://github.com/RonanSynnottArm/avhcli.git
-
-          # - name: Create [${{ env.INSTANCE1 }}] on AVH
-            # run: |
-              # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL create
-              # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL start
-
-          # - name: connect to AVH OpenVPN
-            # run: |
-              # sudo openvpn --config avhcli/avh.ovpn --daemon 
-              # echo Connecting and ping-ing instances...
-              # while ! ping -c 1 $(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"); do
-                # echo .
-                # sleep 1
-              # done
-              # echo Connected
-
-          # - name: scp binaries to ${{ env.INSTANCE1 }}
-            # run: |
-              # sshpass -p raspberry scp -o StrictHostKeyChecking=no ${{ env.INSTANCE1 }} pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"):~/
-              # sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt") chmod 755 ${{ env.INSTANCE1 }}
               
