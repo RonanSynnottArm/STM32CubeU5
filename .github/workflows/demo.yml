@@ -49,7 +49,10 @@ jobs:
               pwd
               cp .github/workflows/example-sensor-test.js .
               cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ./demo.axf
-              npm example-sensor-test.js
+              npm ci
+              export REPORT_PATH=report.json
+              npm run test
+              
 
           # - name: pull avhcli utility
             # run: |
@@ -77,28 +80,3 @@ jobs:
               # sshpass -p raspberry scp -o StrictHostKeyChecking=no ${{ env.INSTANCE1 }} pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt"):~/
               # sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@$(cat "./avhcli/${{ env.INSTANCE1 }}_lan_ip.txt") chmod 755 ${{ env.INSTANCE1 }}
               
-          - name: chmod 755 python scripts
-            run: chmod 755 avhcli/ws.py
-            
-              # chmod 755 scripts/avh/ws.py
-              # chmod 755 scripts/avh/web_socket_light_test.py
-              # chmod 755 scripts/avh/web_socket_chip_tool_test.py
-              # chmod 755 avhcli/ws.py
-
-          # - name: Start webserver on ${{ env.INSTANCE1 }} via WebSocket to console
-            # run: |
-              # ./scripts/avh/web_socket_chip_tool_test.py $(cat "./avhcli/${{ env.INSTANCE1 }}_console.txt")
-
-          - name: install npm
-            uses: actions/setup-node@v3
-            with:
-              node-version: 16
-              
-          - name: sensor demo
-            run:  node .github/workflows/example-sensor-test.js
-
-          - name: Stopping/Deleting ${{ env.INSTANCE1 }}
-            run: | 
-              # sudo killall openvpn
-              avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL delete
-              # avhcli/avhcli.sh -t $API_TOKEN -n $INSTANCE1 -m $MODEL stop
