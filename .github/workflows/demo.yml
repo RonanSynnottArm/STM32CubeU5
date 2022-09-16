@@ -67,6 +67,7 @@ jobs:
               
           - name: chmod 755 python scripts
             run: chmod 755 avhcli/ws.py
+            
               # chmod 755 scripts/avh/ws.py
               # chmod 755 scripts/avh/web_socket_light_test.py
               # chmod 755 scripts/avh/web_socket_chip_tool_test.py
