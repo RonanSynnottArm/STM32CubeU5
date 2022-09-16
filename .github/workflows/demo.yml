@@ -47,10 +47,12 @@ jobs:
           - name: sensor demo
             run: |
               npm install --save glob
+              cd ronan
+              mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
-              cp ronan/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
+              cp STM32CubeU5_Demo_U585I-IOT02A.axf test/demo.axf
               cp ronan/example-sensor-test.js ronan/test/index.js
-              cd ronan/test
+              cd test
               pwd
               ls
               export REPORT_PATH=report.json
