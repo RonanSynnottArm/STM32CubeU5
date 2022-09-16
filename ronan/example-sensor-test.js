@@ -11,7 +11,7 @@ const exec = promisify(require("child_process").exec);
 const BearerAuth = ApiClient.instance.authentications['BearerAuth']
 const api = new ArmApi()
 const CONFIGURATION = {
-  endpoint: process.env.API_ENDPOINT,
+  endpoint: process.env.ENDPOINT,
   apiToken: process.env.API_TOKEN,
 }
 
