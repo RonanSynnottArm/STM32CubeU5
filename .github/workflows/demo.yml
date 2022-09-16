@@ -12,7 +12,7 @@
 #
 # See also scripts/avh directory
 
-name: Rebuild and run STM32U5 Webserver
+name: Run STM32U5 Webserver
 
 on:
     push:
@@ -50,7 +50,6 @@ jobs:
               cd ronan
               pwd
               ls
-              npm ci
               export REPORT_PATH=report.json
               npm run test
               
