@@ -1,0 +1,95 @@
+name: Rebuild and run STM32U5 IOT Webserver example
+
+# Example workflow using Arm Virtual Hardware (AVH) target
+# See https://avh.arm.com for more info
+# 
+# You will need an Arm Virtual Hardware login to run successfully
+# To generate API_TOKEN, go to Profile > API > Generate in AVH browser window.
+# Recommended to specify as API_TOKEN secret
+#
+# Example Project in Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/
+# Converted to .cprj (offline)
+#
+# See also scripts/avh directory
+
+on:
+    # push:
+    # pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.ref }}-${{ github.workflow }}-${{ (github.event_name == 'pull_request' && github.event.number) || (github.event_name == 'workflow_dispatch' && github.run_number) || github.sha }}
+    cancel-in-progress: true
+    
+
+jobs:
+    Fetch Arm arm_crosscompile:
+        name: Linux Arm Cross compile
+        timeout-minutes: 70
+        runs-on: ubuntu-latest
+#        env:
+#          INSTANCE1: ${{ secrets.INSTANCE1 }} 
+#          INSTANCE2: ${{ secrets.INSTANCE2 }}
+        env:
+          INSTANCE1: chip-tool
+          INSTANCE2: chip-lighting-app
+        if: github.actor != 'restyled-io[bot]'
+
+        container:
+            image: connectedhomeip/chip-build-crosscompile:0.5.79
+            volumes:
+                - "/tmp/bloat_reports:/tmp/bloat_reports"
+
+        steps:
+            - uses: Wandalen/wretry.action@v1.0.15
+              name: Checkout
+              with:
+                  action: actions/checkout@v3
+                  with: |
+                      token: ${{ github.token }}
+                  attempt_limit: 3
+                  attempt_delay: 2000
+            - name: Checkout submodules
+              run: scripts/checkout_submodules.py --shallow --platform linux
+
+            - name: Set up environment for size reports
+              if: ${{ !env.ACT }}
+              env:
+                  GH_CONTEXT: ${{ toJson(github) }}
+              run: scripts/tools/memory/gh_sizes_environment.py "${GH_CONTEXT}"
+
+            - name: Bootstrap
+              timeout-minutes: 10
+              run: scripts/build/gn_bootstrap.sh
+
+#            - name: Uploading bootstrap logs
+#              uses: actions/upload-artifact@v2
+#              if: ${{ always() }} && ${{ !env.ACT }}
+#              with:
+#                  name: bootstrap-logs
+#                  path: |
+#                      .environment/gn_out/.ninja_log
+#                      .environment/pigweed-venv/*.log
+
+            - name: Build examples
+              timeout-minutes: 45
+              run: |
+                  ./scripts/run_in_build_env.sh \
+                     "./scripts/build/build_examples.py \
+                        --target linux-arm64-clang-chip-tool-no-interactive \
+                        --target linux-arm64-clang-light \
+                        build \
+                     "
+            - name: upload ${{ env.INSTANCE2 }}
+              uses: actions/upload-artifact@v3
+              with:
+                    name: ${{ env.INSTANCE2 }}
+                    path: ${{ github.workspace }}/out/linux-arm64-clang-light/chip-lighting-app
+                    retention-days: 5
+
+            - name: upload ${{ env.INSTANCE1 }}
+              uses: actions/upload-artifact@v3
+              with:
+                    name: ${{ env.INSTANCE1 }}
+                    path: ${{ github.workspace }}/out/linux-arm64-clang-chip-tool-no-interactive/chip-tool
+                    retention-days: 5
