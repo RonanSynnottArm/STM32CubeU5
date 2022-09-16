@@ -55,14 +55,17 @@ jobs:
             uses: actions/setup-node@v3
             with:
               node-version: 16
-              
-          - name: sensor demo
+
+          - name: npm dependencies
             run: |
               npm install @arm-avh/avh-api --save
               npm install mocha
               npm install split2
               npm install websocket-stream
               npm install promise-socket
+              
+          - name: sensor demo
+            run: |
               cd ronan
               mkdir test
               # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
