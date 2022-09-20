@@ -253,12 +253,12 @@ describe("stm sensor check", function () {
     instance = await api.v1GetInstance(instance.id)
     assert(wifiIp === instance.wifiIp)
   });
-  it('Is reachable over VPN', async () => {
+/*   it('Is reachable over VPN', async () => {
     console.log('Connecting VPN...')
     instance = await waitForState({ id: instance.id }, state => state === 'on')
     const vpnStarted = await startVpn(instance)
     assert(vpnStarted)
-  });
+  }); */
   it("sets and gets the sensors", async () => {
     console.log('Testing sensors...')
     instance = await waitForState({ id: instance.id }, state => state === 'on')
