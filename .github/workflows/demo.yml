@@ -49,12 +49,12 @@ jobs:
                 sudo apt -y install openvpn sshpass curl jq
                 pip install websockets asyncio
 
-          - name: install npm
+          - name: install node
             uses: actions/setup-node@v3
             with:
               node-version: 16
 
-          - name: npm dependencies
+          - name: node dependencies
             run: |
               npm install @arm-avh/avh-api
               npm install mocha
@@ -70,5 +70,6 @@ jobs:
               cp example-sensor-test.js test/index.js
               cd test
               export REPORT_PATH=report.json
+              # ignore return code 1
               npm run test || code=$?; if [[ $code -ne 1 && $code -ne 0 ]]; then exit $code; fi    
               
