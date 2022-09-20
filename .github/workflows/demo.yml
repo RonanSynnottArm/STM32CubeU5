@@ -5,10 +5,7 @@
 # To generate API_TOKEN, go to Profile > API > Generate in AVH browser window.
 # Recommended to specify as API_TOKEN secret
 #
-# Example Project in Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/
-# Built offline
-#
-# See also scripts/avh directory
+# See also cicd_demo directory
 
 name: Run STM32U5 Webserver
 
@@ -27,10 +24,12 @@ jobs:
         steps:
           - name: rebuild example
             run: |
-              echo to do
+              echo Example in Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM
+              echo requires license for Arm Compiler
+              echo for now can be rebuilt off-line with Keil MDK or cbuild.sh
+              echo project contains new pre-built image
               # cd Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM
               # cbuild.sh STM32CubeU5_Demo_U585I-IOT02A.STM32CubeU5_Demo_U585I-IOT02A.cprj
-
         
     avh-test:
         runs-on: ubuntu-latest
