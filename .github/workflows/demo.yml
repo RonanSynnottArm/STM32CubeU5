@@ -70,5 +70,5 @@ jobs:
               cp example-sensor-test.js test/index.js
               cd test
               export REPORT_PATH=report.json
-              npm run test
+              npm run test || code=$?; if [[ $code -ne 1 && $code -ne 0 ]]; then exit $code; fi    
               
