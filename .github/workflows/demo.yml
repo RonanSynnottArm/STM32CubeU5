@@ -27,7 +27,8 @@ jobs:
               echo Example in Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM
               echo requires license for Arm Compiler
               echo for now can be rebuilt off-line with Keil MDK or cbuild.sh
-              echo project contains new pre-built image
+              echo My repo contains new pre-built image
+              echo MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf
               # cd Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM
               # cbuild.sh STM32CubeU5_Demo_U585I-IOT02A.STM32CubeU5_Demo_U585I-IOT02A.cprj
         
