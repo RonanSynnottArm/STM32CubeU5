@@ -11,10 +11,10 @@ const exec = promisify(require("child_process").exec);
 const BearerAuth = ApiClient.instance.authentications['BearerAuth']
 const api = new ArmApi()
 const CONFIGURATION = {
-//  endpoint: process.env.API_ENDPOINT,
-//  apiToken: process.env.API_TOKEN,
-	endpoint: "https://app.avh.arm.com/api",
-	apiToken: "a619484ea9c28e5418df.a2ab5797ab613681ee129c07f1f8b9510979575d632e966b377dbcb457e33fd08790ab1d3bca5d14e35e0b9b3e58e6e542ef9f3e7365391f7964bfb39a19c433",
+  endpoint: process.env.API_ENDPOINT,
+  apiToken: process.env.API_TOKEN,
+//	endpoint: "https://app.avh.arm.com/api",
+//	apiToken: "a619484ea9c28e5418df.a2ab5797ab613681ee129c07f1f8b9510979575d632e966b377dbcb457e33fd08790ab1d3bca5d14e35e0b9b3e58e6e542ef9f3e7365391f7964bfb39a19c433",
 }
 
 function sleep(ms) {
@@ -75,7 +75,7 @@ async function startVpn(instance) {
   openVpn = spawn('openvpn', ['--config', 'vpnconfig.ovpn'])
   openVpn.stdout.on('data', (data) => console.log(data.toString()))
   openVpn.stderr.on('data', (data) => console.log(data.toString()))
-  for (let i=0; i<10; i++) {
+  for (let i=0; i<2; i++) {
     // Wait for openvpn link to establish
     console.log('Waiting for VPN link to establish...')
     try {
