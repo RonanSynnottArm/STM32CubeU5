@@ -1,5 +1,3 @@
-# a619484ea9c28e5418df.a2ab5797ab613681ee129c07f1f8b9510979575d632e966b377dbcb457e33fd08790ab1d3bca5d14e35e0b9b3e58e6e542ef9f3e7365391f7964bfb39a19c433
-
 # Example workflow using Arm Virtual Hardware (AVH) target
 # See https://avh.arm.com for more info
 # 
@@ -58,23 +56,19 @@ jobs:
 
           - name: npm dependencies
             run: |
-              npm install @arm-avh/avh-api --save
+              npm install @arm-avh/avh-api
               npm install mocha
               npm install split2
               npm install websocket-stream
               npm install promise-socket
               
-          - name: sensor demo
+          - name: sensor cicd demo
             run: |
-              cd ronan
+              cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf cicd_demo/demo.axf
+              cd cicd_demo
               mkdir test
-              # cp Projects/B-U585I-IOT02A/Demonstrations/IOT_HTTP_WebServer/MDK-ARM/STM32CubeU5_Demo_U585I-IOT02A/Exe/STM32CubeU5_Demo_U585I-IOT02A.axf ronan/test/demo.axf
-              cp STM32CubeU5_Demo_U585I-IOT02A.axf test/demo.axf
-              cp STM32CubeU5_Demo_U585I-IOT02A.bin test/demo.bin
               cp example-sensor-test.js test/index.js
               cd test
-              pwd
-              ls
               export REPORT_PATH=report.json
               npm run test
               
